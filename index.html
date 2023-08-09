@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+	<title>Create Image Gallery From The Contents Of A Website Folder | HTML & JavaScript & CSS</title> 
+	<meta name="description" content="">
+
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+	<meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head> 
+
+
+<body>
+
+	<div class="intro">	<!-- use href="../downloads/create-image-gallery-from-the-contents-of-a-website-folder-example.zip" below if hosting elsewhere and not using git LFS (large file storage) -->
+		<h3 style="display: inline">The code used in this demo site automatically builds a gallery from images placed in the websites thumbnail folder to save you having to seperately add code for every image.</h3>
+		<p style="font-size: medium">(See below the gallery for a description of how it works and to <a href="https://github.com/boxbot6/create-image-gallery-from-the-contents-of-a-website-folder/raw/main/downloads/create-image-gallery-from-the-contents-of-a-website-folder-example.zip" download >download the demo files</a>).</p>
+
+		<h2>Create Image Gallery From The Contents Of A Website Folder</h2> 
+
+		<div id="image-gallery">
+			<img id="current-image" src="images/image (1).jpg" alt = "Image Gallery Image (1)">
+			<span id="overlay" class="loading-spinner"></span>
+		</div>
+
+
+		<p>Click on a thumbnail below to load the main image above (right-click on the image above to save it)</p> 
+	</div>
+
+
+	<div class="grid-container" id="image-thumbs">
+	</div>
+
+
+	<script>
+		var imageThumbs = document.getElementById("image-thumbs");
+		var currentImage = document.getElementById("current-image");
+
+		let i = 1;
+
+		var tempImg = new Image();
+		tempImg.onload = function(){
+		  appendImage();
+		}
+
+		var tryLoadImage = function(){
+			tempImg.src = "thumbnails/image" + " (" + i + ")" + ".jpg";
+		}
+
+		var appendImage = function(){
+			var thumb = document.createElement("img");
+			thumb.src = tempImg.src;
+ 			thumb.alt = "Image Gallery Image" + " (" + i + ")";
+ 			thumb.classList.add("thumb");
+			imageThumbs.appendChild(thumb);
+			thumb.addEventListener("click", function() {
+
+     				document.getElementsByClassName("loading-spinner")[0].style.visibility = "visible";
+				currentImage.src = this.src.replace("thumbnails/", "images/");
+
+
+			function checkLoaded(){
+				var finishedLoading = document.getElementById("current-image").complete;
+
+					if (finishedLoading) { document.getElementsByClassName("loading-spinner")[0].style.visibility = "hidden"; 
+					}
+
+   			setTimeout(checkLoaded, 1000);
+			}
+
+			checkLoaded();
+
+				clearTimeout(checkLoaded);
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+
+				}
+				);
+
+ 		  tryLoadImage(i++)
+		}
+
+		tryLoadImage(i);
+	</script>
+
+
+<br>
+<br>
+
+<hr>
+<p>*** You can delete the title at the top of the page and all the code below this line when using this demo - its included here for guidance only ***</p>
+
+<div style="margin-right: 20px; margin-left: 20px">
+
+<p>Files included in the download:</p>
+
+
+ 	     		<div>
+				<a href="images/download-files-sample.png">
+			        <img src="images/download-files-sample.png" width="300px" />
+				</a>
+			</div>
+
+
+			<div>	<!-- use href="../downloads/create-image-gallery-from-the-contents-of-a-website-folder-example.zip" below if hosting elsewhere and not using git LFS (large file storage) -->
+				<a href="https://github.com/boxbot6/create-image-gallery-from-the-contents-of-a-website-folder/raw/main/downloads/create-image-gallery-from-the-contents-of-a-website-folder-example.zip" download>
+					<ul>
+
+					<div class="download-button">
+					<span>Download Demo &nbsp;&nbsp;&nbsp;</span>
+					<img style="vertical-align:middle" src="./images/download-icon-1.png" alt="image" height="25">
+					</div>
+				</a>
+			</div>
+
+
+			<br />
+
+
+
+	<h3 style="display: inline">Notes:</h3><p style="display: inline"> The main purpose of this code is to save you having to type the image info (example shown below) again and again for every single image in a large gallery.</p>
+
+
+<pre><code>&lt;div>
+	&lt;a href="images/image (1).jpg">
+	&lt;img src="thumbnails/image (1).jpg" alt="Image Gallery Thumbnail (1)"> 
+	&lt;/a>
+&lt;/div></code></pre>
+
+
+	<p>Apparently html cannot directly view the contents of a directory folder to make a gallery of the images in that folder unless you use an external server based element like PHP or an API. This is an alternative, simple way of making image galleries from folders in html, however it is a little restricted because you have to rename all the images following a predictable pattern so that you can display them by "guessing" at the next predictable file in a sequence. This particular version of the method is recommended because unlike others you don't have to specifically count and include the exact number of images that you want the code to loop through and add - just drop any number of thumbnails in the thumbnail folder and an duplicate number of identically named full-sized images into the images folder - keep the names for both sets identical and predictable e.g. image (1), image (2), image (3), etc.</p>
+
+	<p> I've made it so that the image naming convention used in this example can be easily done by using batch renaming in file explorer - just select a bunch of image files by holding down the Shift key and rename all the selected files to "image" at once - the suffix will automatically add consecutive numbers in the correct format to them all. e.g. image (1), image (2), image (3), etc.</p>
+
+	<p> Please make sure there are no gaps in the number sequence and be cautious when adding any further .jpg files to the /images or /thumbnails folders so that they don't interrupt the sequence.</p>
+
+	<br>
+
+
+	<h3 style="display: inline">Here is the index.html code:</h3>
+	<p> If you want you can remove the javascript contained in this, put it in a seperate .js file and to link it instead.</p>
+
+
+<pre><code>&lt;!DOCTYPE html>
+&lt;html> 
+&lt;head> 
+	&lt;title>Create Image Gallery From The Contents Of A Websites Folder&lt;/title> 
+	&lt;link rel="stylesheet" type="text/css" href="style.css" />
+&lt;/head> 
+&lt;body>
+	&lt;div class="intro"> 
+
+		&lt;h2>Create Image Gallery From The Contents Of A Websites Folder&lt;/h2> 
+
+		&lt;div id="image-gallery">
+			&lt;img id="current-image" src="images/image (1).jpg" alt = "Image Gallery Image (1)">
+			&lt;span id="overlay" class="loading-spinner">&lt;/span>
+		&lt;/div>
+
+
+		&lt;p>Click on a thumbnail below to load the hi-res image above (right-click image above to save it)&lt;/p> 
+	&lt;/div>
+
+
+ 	&lt;div class="grid-container"> 
+		&lt;div id="image-thumbs">&lt;/div>
+	&lt;/div>
+
+
+	&lt;script>
+		var imageThumbs = document.getElementById("image-thumbs");
+		var currentImage = document.getElementById("current-image");
+
+		let i = 1;
+
+		var tempImg = new Image();
+		tempImg.onload = function(){
+		  appendImage();
+		}
+
+		var tryLoadImage = function(){
+			tempImg.src = "thumbnails/image" + " (" + i + ")" + ".jpg";
+		}
+
+		var appendImage = function(){
+			var thumb = document.createElement("img");
+			thumb.src = tempImg.src;
+ 			thumb.alt = "Image Gallery Image" + " (" + i + ")";
+ 			thumb.classList.add("thumb");
+			imageThumbs.appendChild(thumb);
+			thumb.addEventListener("click", function() {
+
+     				document.getElementsByClassName("loading-spinner")[0].style.visibility = "visible";
+				currentImage.src = this.src.replace("thumbnails/", "images/");
+
+
+			function checkLoaded(){
+				var finishedLoading = document.getElementById("current-image").complete;
+
+					if (finishedLoading) { document.getElementsByClassName("loading-spinner")[0].style.visibility = "hidden"; 
+					}
+
+   			setTimeout(checkLoaded, 1000);
+			}
+
+			checkLoaded();
+
+				clearTimeout(checkLoaded);
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+
+				}
+				);
+
+ 		  tryLoadImage(i++)
+		}
+
+		tryLoadImage(i);
+	&lt;/script>
+&lt;/body>
+&lt;/html></code></pre>
+
+	<br>
+
+	<h3 style="display: inline">Here is the style.css code:</h3>
+
+
+<pre><code>.intro { 
+	text-align: center;
+	font-family: Arial;
+}
+
+.grid-container { 
+	text-align: center;
+	background: #DCDCDC;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+h2 { 
+	font-size: 36px;
+}
+
+p { 
+ 	font-size: 14pt;
+}
+
+#image-gallery {
+	position: relative;
+	width: 600px; 
+	margin: 0 auto;
+}
+
+#current-image {
+	position: relative;
+	width: 100%;
+}
+
+#overlay {
+	visibility: hidden;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.thumb {
+ 	width: 280px;
+  	/* height: 280px; */
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	/* object-fit: cover; */
+	align-items: center;
+	text-align: center;
+	cursor: pointer;
+}
+
+#image-thumbs {
+	justify-content: center;
+}
+
+.loading-spinner {
+	width: 57px;
+	height: 57px;
+	border: 7px solid #aaaaaa; /* gray */
+	border-bottom-color: transparent;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	animation: rotation 1s linear infinite;
+	}
+
+@keyframes rotation {
+	0% {transform: rotate(0deg);}
+	100% {transform: rotate(360deg);}
+}</code></pre>
+
+
+	<br>
+
+	<h3 style="display: inline">*** Don't forget to add the images and thumbnails folders with some correctly named demo images in them ***</h3>
+
+	<br>
+	<br>
+
+
+	<h3>The thumbnail gallery above on this page is built automatically from images placed in the websites thumbnail folder (contents shown in the iframe below).</h3>
+
+
+	<div style="margin-top: 10px; margin-right: 20px; margin-left: 20px">
+		<iframe
+		src="thumbnails/contents-list.txt"
+		width="100%"
+		height="200px"
+		name="targetframe"
+		allowTransparency="true"
+		scrolling="yes"
+		frameborder="4px"
+		>
+		</iframe>
+
+	<a href="thumbnails/contents-list.txt" target="_blank" rel="noopener noreferrer">(Click here to open the above thumbnails folder in a new tab).</a>
+	</div>
+
+	<br>
+
+	<p>Additional tech note: The iframe of the thumbnail directory above is really only shown here because I was ideally trying to find a way to get a website folders contents to load directly into an html page and keep the original names of the images. Getting it to list the filenames on the same page inside an iframe was as close as I got apart from the renaming demo shown above. - I figure there must be a way access the images without PHP or API but it is beyond my knowledge at present.</p>
+
+<p>Update: After putting this site online the iframe above showing the thumbnails folder contents stopped working - probably the same reason of not being able to read anything from the server without php! - to repair I have added a contents-list.txt to the thumbnails folder and linked to that instead.</p>
+
+	<br>
+	<br>
+
+	<h3>Keywords (included here just to help search engines find this site):</h3>
+	<p style="margin-left: 40px;">How to load images from a folder into HTML page for display in a gallery/album automatically | Put all images from directory into HTML gallery | Insert images from a folder automatically | Html and Javascript image gallery | How do I read folder images and display inside html? | Adding images from a folder to website dynamically | Image gallery html css javascript | Add images from thumbnail folder to album | Show image folder contents in html.<br /></p>
+
+
+	<br>
+	<br>
+
+	<h3 style="display: inline">Thanks to the makeuseof article:</h3>
+	<p style="display: inline; font-size: 14pt"> • How to Create a Simple Image Gallery Using HTML, CSS, and JavaScript •<br>
+	<a href="https://www.makeuseof.com/image-gallery-html-css-javascript">www.makeuseof.com/image-gallery-html-css-javascript.</a></p>
+
+<br>
+<br>
+
+
+</div>
+
+</body>
+</html>

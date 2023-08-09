@@ -1,0 +1,123 @@
+.intro { 
+	text-align: center;
+	font-family: Arial;
+}
+
+.grid-container {
+	display: grid;
+	text-align: center;
+	background: #DCDCDC;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 22px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 18px;
+	padding-bottom: 20px;
+	/* row-gap: 20px; */
+	grid-template-columns: repeat(auto-fill, 280px);
+	justify-content: space-around;
+}
+
+h2 { 
+	font-size: 36px;
+}
+
+p { 
+ 	font-size: 14pt;
+}
+
+#image-gallery {
+	position: relative;
+	width: 600px; 
+	margin: 0 auto;
+}
+
+#current-image {
+	position: relative;
+	width: 100%;
+} 
+
+#overlay {
+	visibility: hidden;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+} 
+
+.thumb {
+	width: 280px;
+  	/* height: 280px; */
+	margin: 0px;
+	padding-top: 22px;
+	padding-bottom: 22px;
+	/* padding: 0px; */
+	color: white;
+	font-size: 60px;
+	font-weight: bold;
+	text-align: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+#image-thumbs {
+	/* justify-content: center; */
+}
+
+.loading-spinner {
+	width: 57px;
+	height: 57px;
+	border: 7px solid #aaaaaa; /* gray */
+	border-bottom-color: transparent;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+	0% {transform: rotate(0deg);}
+	100% {transform: rotate(360deg);}
+}
+
+pre code {
+	background: ghostwhite;
+	margin: 10px;
+	border: 1px solid lightgray;
+	display: block;
+	padding-left: 20px;
+	font-size: 16px;
+}
+
+/*============download button============*/
+
+.download-button {
+	background-color: #0b5394;
+	border: none;
+	border-radius: 8px;
+	color: white;
+	padding: 15px 32px;
+	vertical-align:middle;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 20px;
+	font-family:tahoma;
+	transition-duration: 0.4s;
+ 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.download-button:hover {
+	background-color: #0074cc; /* dark blue */
+}
+
+.download-button:active {
+  background-color: #0057b1; /* darker blue */
+  transition-duration: 0.1s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.29), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+  /*transform: translateY(2px);*/
+}
