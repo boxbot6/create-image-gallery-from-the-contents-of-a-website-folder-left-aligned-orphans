@@ -30,13 +30,14 @@ p {
 
 #image-gallery {
 	position: relative;
+	max-width: 100%;
 	width: 600px; 
 	margin: 0 auto;
 }
 
 #current-image {
 	position: relative;
-	width: 100%;
+        max-width: 100%;
 } 
 
 #overlay {
@@ -85,6 +86,7 @@ p {
 }
 
 pre code {
+	white-space: pre-wrap;
 	background: ghostwhite;
 	margin: 10px;
 	border: 1px solid lightgray;
